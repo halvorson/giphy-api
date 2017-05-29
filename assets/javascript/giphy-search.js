@@ -36,7 +36,7 @@ function searchFromClick() {
 function giphySearch() {
 	//console.log(this);
 	var limit = 20;
-	var queryURL = "http://api.giphy.com/v1/gifs/search?q="+currentSearchString+"&api_key=dc6zaTOxFJmzC&limit="+limit+"&offset="+offset;
+	var queryURL = "https://api.giphy.com/v1/gifs/search?q="+currentSearchString+"&api_key=dc6zaTOxFJmzC&limit="+limit+"&offset="+offset;
 	offset += limit;
 	//console.log(queryURL);
 	$.ajax({
