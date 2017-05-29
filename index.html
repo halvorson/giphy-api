@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Fun with Giphy API</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- <link href="assets/css/reset.css" rel="stylesheet"> -->
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<link href="assets/css/style.css" rel="stylesheet">
+
+	
+</head>
+<body>
+	<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+		<a class="navbar-brand" href="#">Giphy Search</a>
+	</nav>
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+					<ul class="nav nav-pills flex-column">
+						<li class="nav-item">
+							<form class="form-inline">
+								<input class="form-control" type="text" id="addBox" placeholder="New entry">
+								<button class="btn btn-outline-success" id="addButton" type="submit">Add to list</button>
+							</form>
+						</li>
+					</ul>
+					<ul class="nav nav-pills flex-column" id="searchLinks">
+						<li class="nav-item">
+							<span class="nav-link active" href="#">Overview</span>
+						</li>
+						<li class="nav-item">
+							<span class="nav-link" href="#">Reports</span>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Analytics</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Export</a>
+						</li>
+					</ul>
+					<ul class="nav nav-pills flex-column" id="searchLinks">
+						<li class="nav-item">
+							<form class="checkbox-inline nav-link" id="hoverBox">
+								<label><input type="checkbox" id="hoverToggle" placeholder="New entry"> Play on hover?</label>
+							</form>
+						</li>
+					</ul>
+				</nav>
+
+				<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+					<div class="" id="giphyDisplay">
+						<h2>Choose a search term on the left, or add your own!</h2>
+					</div>
+				</main>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script src="assets/javascript/jquery-3.2.1.min.js"></script>
+<script src="assets/javascript/endlessScroll.js"></script>
+
+<script src="assets/javascript/giphy-search.js"></script>
+<script>
+
+</script>
+</body>
+</html>
