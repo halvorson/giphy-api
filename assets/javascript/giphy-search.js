@@ -7,12 +7,9 @@ function drawSidebar() {
 	var searchTermsLength = searchTerms.length;
 	for (var i = 0; i < searchTermsLength; i++) {
 		var li = $("<li>").addClass("nav-item searchItem").data("searchTerm", searchTerms[i]).append($("<span>").addClass("nav-link").text(searchTerms[i]));
-		//Keeps "active" class on redraw
-		if(currentSearchString === searchTerms[i]) {
-			li.children().addClass("active");
-		}
 		$("#searchLinks").append(li);
 	}
+	properHighlight();
 }
 
 $("#addButton").on("click", function(event) {
@@ -24,12 +21,24 @@ $("#addButton").on("click", function(event) {
 	drawSidebar();
 });
 
+//Previous versions had broken highlighting (e.g., multiple things would be highlighted). Consolidated into one method to fix.
+function properHighlight() {
+	$("#searchLinks").children("li").each(function(i) {
+		if(currentSearchString === $(this).data("searchTerm")) {
+			$(this).children().addClass("active");
+		} else {
+			$(this).children().removeClass("active");
+		}
+	});
+	
+}
+
 function searchFromClick() {
 	$("#giphyDisplay").empty();
 	$("#giphyDisplay").addClass("card-columns");
 	offset = 0;
 	currentSearchString = $(this).data("searchTerm");
-	$(this).children().addClass("active");
+	properHighlight();
 	giphySearch();
 }
 
