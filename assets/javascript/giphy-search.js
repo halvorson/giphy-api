@@ -73,8 +73,7 @@ function giphyFillIn(res) {
 			lastElementInColumn[shortestColumnIndex].after($("<div>").addClass("card").append($("<img>", {
 				src: giphyArray[i].images.fixed_width_still.url
 			}).data("giphyResult",giphyArray[i]).addClass("giphyStill")).append($("<p>").addClass("card-text text-center").append($("<small>").addClass("text-muted").text("Rating: "+giphyArray[i].rating))));
-		}
-		
+		}	
 	}
 }
 
@@ -100,15 +99,15 @@ function getColumnInfo() {
 			columnIndex++;
 		}
 	});
-	console.log(lastElementInColumn);
-	console.log(bottomOfColumns);
+	//console.log(lastElementInColumn);
+	//console.log(bottomOfColumns);
 	shortestColumnIndex = 0;
 	for (var i = 0; i <= columnIndex; i++) {
 		if(bottomOfColumns[i] < bottomOfColumns[shortestColumnIndex]) {
 			shortestColumnIndex = i;
 		}
 	}
-	console.log(shortestColumnIndex);
+	//console.log(shortestColumnIndex);
 }
 
 function giphyPlay() {
