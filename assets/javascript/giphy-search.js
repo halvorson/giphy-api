@@ -30,7 +30,6 @@ function properHighlight() {
 			$(this).children().removeClass("active");
 		}
 	});
-	
 }
 
 function searchFromClick() {
@@ -59,12 +58,57 @@ function giphySearch() {
 
 function giphyFillIn(res) {
 	var giphyArray = res.data;
-	for (var i = 0; i < giphyArray.length; i++) {
-		//console.log(giphyArray[i]);
-		$("#giphyDisplay").append($("<div>").addClass("card").append($("<img>", {
-			src: giphyArray[i].images.fixed_width_still.url
-		}).data("giphyResult",giphyArray[i]).addClass("giphyStill")).append($("<p>").addClass("card-text text-center").append($("<small>").addClass("text-muted").text("Rating: "+giphyArray[i].rating))));
+	//First time, it just distributes them randomly; subsequent times, it should try to maintain column order by adding to the shortest
+	if($("#giphyDisplay").children().length === 0) {
+		for (var i = 0; i < giphyArray.length; i++) {
+			//console.log(giphyArray[i]);
+			$("#giphyDisplay").append($("<div>").addClass("card").append($("<img>", {
+				src: giphyArray[i].images.fixed_width_still.url
+			}).data("giphyResult",giphyArray[i]).addClass("giphyStill")).append($("<p>").addClass("card-text text-center").append($("<small>").addClass("text-muted").text("Rating: "+giphyArray[i].rating))));
+		}
+	} else {
+		//This was a dumb idea. Really doesn't work, and is now much harder to explain than just shifting everything. 
+		for (var i = 0; i < giphyArray.length; i++) {
+			getColumnInfo();
+			lastElementInColumn[shortestColumnIndex].after($("<div>").addClass("card").append($("<img>", {
+				src: giphyArray[i].images.fixed_width_still.url
+			}).data("giphyResult",giphyArray[i]).addClass("giphyStill")).append($("<p>").addClass("card-text text-center").append($("<small>").addClass("text-muted").text("Rating: "+giphyArray[i].rating))));
+		}
+		
 	}
+}
+
+var lastElementInColumn = [];
+var bottomOfColumns = [];
+var shortestColumnIndex;
+
+//Should return last element in column, and which column is shortest
+function getColumnInfo() {
+	lastElementInColumn = [];
+	bottomOfColumns = [];
+	bottomOfColumns.push(0);
+	var columnIndex = 0;
+	$("#giphyDisplay").children(".card").each(function(i) {
+		console.log("Position of previous element: " + bottomOfColumns[columnIndex]);
+		console.log("Position of element: " + $(this).position().top);
+		if($(this).position().top + $(this).height() > bottomOfColumns[columnIndex]) {
+			bottomOfColumns[columnIndex] = $(this).position().top + $(this).height();
+			lastElementInColumn[columnIndex] = $(this);
+		} else {
+			bottomOfColumns.push(0);
+			lastElementInColumn.push($(this));
+			columnIndex++;
+		}
+	});
+	console.log(lastElementInColumn);
+	console.log(bottomOfColumns);
+	shortestColumnIndex = 0;
+	for (var i = 0; i <= columnIndex; i++) {
+		if(bottomOfColumns[i] < bottomOfColumns[shortestColumnIndex]) {
+			shortestColumnIndex = i;
+		}
+	}
+	console.log(shortestColumnIndex);
 }
 
 function giphyPlay() {
@@ -97,6 +141,7 @@ drawSidebar();
 //Necessary to clear the main area and reset the offset counter 
 $(document).on("click", ".searchItem", searchFromClick);
 
+//When clicking on a giphy, play/pause it
 $(document).on("click", ".giphyStill", giphyPlay);
 $(document).on("click", ".giphyActive", giphyPause);
 
